@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Cties Infos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body>
+<div align="center">
+    <h1>List</h1>
+    <a href="/new">Create New Info</a>
+    <br/><br/>
+    <table border="1" cellpadding="10">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>City</th>
+            <th>Info</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="cityInfo : ${infoList}">
+            <td th:text="${cityInfo.id}">ID</td>
+            <td th:text="${cityInfo.city}">City</td>
+            <td th:text="${cityInfo.info}">Info</td>
+            <td>
+                <a th:href="@{/edit/{id}(id=${cityInfo.id})}">Edit</a>
+                &nbsp;&nbsp;&nbsp;
+                <a th:href="@{/delete/{id}(id=${cityInfo.id})}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
