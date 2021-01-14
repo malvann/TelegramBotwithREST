@@ -2,13 +2,9 @@ package com.example.TelegramBot.controller;
 
 import com.example.TelegramBot.model.CityInfo;
 import com.example.TelegramBot.service.CityService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -16,8 +12,11 @@ import java.util.List;
 @Controller
 public class AppController {
 
-    @Autowired
-    private CityService service;
+    private final CityService service;
+
+    public AppController(CityService service) {
+        this.service = service;
+    }
 
     @RequestMapping("/")
     public String viewHomePage(Model model) {
@@ -33,7 +32,7 @@ public class AppController {
         return "new_cityInfo";
     }
 
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    @PostMapping(path = "/save")
     public String saveCityInfo(@ModelAttribute("cityInfo") CityInfo cityInfo) {
         service.save(cityInfo);
         return "redirect:/";

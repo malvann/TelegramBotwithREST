@@ -1,7 +1,6 @@
 package com.example.TelegramBot.service;
 
 import com.example.TelegramBot.model.CityInfo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -10,8 +9,11 @@ import java.util.List;
 @Service
 @Transactional
 public class CityService {
-    @Autowired
-    private CityRepository repository;
+    private final CityRepository repository;
+
+    public CityService(CityRepository repository) {
+        this.repository = repository;
+    }
 
     public List<CityInfo> getAll(){
         return repository.findAll();
